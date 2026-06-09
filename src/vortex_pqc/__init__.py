@@ -55,7 +55,7 @@ primitives while the algebraic construction is entirely different.
 >>> assert ss == ct.shared_secret
 """
 
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 __author__  = "Bajpai Labs"
 __email__   = "hello@bajpailabs.com"
 __url__         = "https://postquantumlabs.in/library/vortex-pqc"

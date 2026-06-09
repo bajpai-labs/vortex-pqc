@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "vortex-pqc"
-version = "1.0.1"
+version = "1.0.2"
 description = "VORTEX-256: Novel post-quantum KEM based on Rotational Module LWE (RotMLWE)"
 readme = "README.md"
 requires-python = ">=3.10"

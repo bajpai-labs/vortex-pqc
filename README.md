@@ -1,58 +1,33 @@
-<p align="center">
-  <a href="https://bajpailabs.com"><img src="https://img.shields.io/badge/Enterprise-Bajpai_Labs-181717?style=for-the-badge" alt="Bajpai Labs" /></a>
-</p>
+# VORTEX-256
 
-<p align="center">
-  <img src="https://img.shields.io/badge/post--quantum-KEM-7c3aed?style=for-the-badge" alt="Post-Quantum KEM" />
-  <img src="https://img.shields.io/badge/primitive-RotMLWE-2563eb?style=for-the-badge" alt="RotMLWE" />
-  <img src="https://img.shields.io/badge/python-3.10+-3776ab?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.10+" />
-  <img src="https://img.shields.io/badge/license-MIT-22c55e?style=for-the-badge" alt="MIT License" />
-</p>
+**A lattice KEM built on Rotational Module Learning With Errors (RotMLWE).**
 
-<h1 align="center">VORTEX-256</h1>
+Same footprint as Kyber-512 · Entirely different mathematics · Standalone library
 
-<p align="center">
-  <strong>A new lattice KEM built on Rotational Module Learning With Errors</strong><br/>
-  <sub>Same footprint as Kyber-512 · Entirely different mathematics · Standalone library</sub><br/>
-  <sub>A <a href="https://bajpailabs.com">Bajpai Labs</a> project · <a href="https://postquantumlabs.in/library/vortex-pqc">postquantumlabs.in/library/vortex-pqc</a></sub>
-</p>
+[![Bajpai Labs](https://img.shields.io/badge/Enterprise-Bajpai_Labs-181717?style=flat-square)](https://bajpailabs.com)
+[![CI](https://github.com/bajpai-labs/vortex-pqc/actions/workflows/ci.yml/badge.svg)](https://github.com/bajpai-labs/vortex-pqc/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/vortex-pqc?color=7c3aed&style=flat-square)](https://pypi.org/project/vortex-pqc/)
+[![Python](https://img.shields.io/badge/python-3.10+-3776ab?style=flat-square&logo=python&logoColor=white)](https://pypi.org/project/vortex-pqc/)
+[![License](https://img.shields.io/badge/license-MIT-22c55e?style=flat-square)](LICENSE)
+[![Library](https://img.shields.io/badge/library-vortex--pqc-7c3aed?style=flat-square)](https://postquantumlabs.in/library/vortex-pqc)
+[![Docs](https://img.shields.io/badge/docs-vortex--pqc-2563eb?style=flat-square)](https://postquantumlabs.in/docs/vortex-pqc)
 
-<p align="center">
-  <a href="https://github.com/bajpai-labs/vortex-pqc/actions/workflows/ci.yml"><img src="https://github.com/bajpai-labs/vortex-pqc/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
-  <a href="https://pypi.org/project/vortex-pqc/"><img src="https://img.shields.io/pypi/v/vortex-pqc?color=7c3aed" alt="PyPI" /></a>
-  <a href="https://postquantumlabs.in/library/vortex-pqc"><img src="https://img.shields.io/badge/home-library-7c3aed" alt="Library" /></a>
-  <a href="https://postquantumlabs.in/docs/vortex-pqc"><img src="https://img.shields.io/badge/docs-read-2563eb" alt="Documentation" /></a>
-</p>
+A [Bajpai Labs](https://bajpailabs.com) project · [postquantumlabs.in/library/vortex-pqc](https://postquantumlabs.in/library/vortex-pqc)
 
-<br/>
+## How it works
 
 ```
-                              ╭──────────────────────────────────────╮
-                              │                                      │
-         ρ  ──▶  a₀ ──σ──▶  a₁ ──σ──▶  a₂ ──σ──▶  …               │
-                              │         Frobenius orbit              │
-                              │         of a single ring element     │
-                              ╰──────────────────────────────────────╯
-                                           │
-                              bᵢ = aᵢ · s + eᵢ     (K correlated instances)
-                                           │
-                              pk  ·  ct  ·  32-byte shared secret
+         ρ  ──▶  a₀ ──σ──▶  a₁ ──σ──▶  a₂ ──σ──▶  …
+                    Frobenius orbit of a single ring element
+                              │
+                 bᵢ = aᵢ · s + eᵢ   (K correlated instances)
+                              │
+                 pk  ·  ct  ·  32-byte shared secret
 ```
 
-<br/>
-
-## ✦ At a glance
-
-<table>
-<tr>
-<td width="50%" valign="top">
-
-### The invention
-
-ML-KEM samples a full `k×k` matrix of random ring elements.
-
-**VORTEX-256** samples **one** element `a`, then derives the public
-structure from its **Frobenius orbit**:
+Standard ML-KEM (Kyber) samples a full `k×k` matrix of random ring elements.
+**VORTEX-256** samples **one** element `a`, then derives the public structure
+from its **Frobenius orbit**:
 
 ```
 σ : f(x) ↦ f(x³ mod x²⁵⁶+1)
@@ -64,19 +39,14 @@ bᵢ = aᵢ · s + eᵢ
 
 One secret `s`. K rotations. A new hardness assumption — **RotMLWE**.
 
-</td>
-<td width="50%" valign="top">
-
-### The footprint
-
-Identical wire sizes to Kyber-512 — drop-in at the byte level.
+## At a glance
 
 | Object | Size |
 |:-------|-----:|
-| Public key | `800 B` |
-| Private key | `1 248 B` |
-| Ciphertext | `768 B` |
-| Shared secret | `32 B` |
+| Public key | 800 B |
+| Private key | 1 248 B |
+| Ciphertext | 768 B |
+| Shared secret | 32 B |
 
 | | Kyber-512 | VORTEX-256 |
 |:--|:--:|:--:|
@@ -84,24 +54,16 @@ Identical wire sizes to Kyber-512 — drop-in at the byte level.
 | Secret type | vector | **scalar** |
 | Assumption | MLWE | **RotMLWE** |
 
-</td>
-</tr>
-</table>
-
-<br/>
-
-## ✦ Install
+## Install
 
 ```bash
 pip install vortex-pqc
 ```
 
-No runtime dependencies. Compiles an optional native extension when a C
-toolchain is present; otherwise falls back to a pure-Python reference.
+No runtime dependencies. Compiles an optional native extension when a C toolchain
+is present; otherwise falls back to a pure-Python reference.
 
-<br/>
-
-## ✦ Thirty seconds to a shared secret
+## Quick start
 
 ```python
 from vortex_pqc import generate_keypair, encapsulate, decapsulate
@@ -109,19 +71,13 @@ from vortex_pqc import generate_keypair, encapsulate, decapsulate
 alice = generate_keypair()
 bob   = encapsulate(alice.public_key)
 
-# bob sends bob.data (768 B) to alice
+# Bob sends bob.data (768 B) to Alice
 alice_secret = decapsulate(bob.data, alice.private_key)
 
-assert alice_secret == bob.shared_secret   # both parties agree
+assert alice_secret == bob.shared_secret
 ```
 
-<p align="center">
-  <img src="https://img.shields.io/badge/result-32_byte_shared_secret-7c3aed?style=flat-square" />
-</p>
-
-<br/>
-
-## ✦ How the exchange works
+## Key exchange
 
 ```mermaid
 sequenceDiagram
@@ -130,25 +86,18 @@ sequenceDiagram
 
     Note over Alice: generate_keypair()
     Alice->>Alice: pk (800 B) · sk (1248 B)
-
     Alice->>Bob: public key
 
     Note over Bob: encapsulate(pk)
     Bob->>Bob: ct (768 B) · ss (32 B)
-
     Bob->>Alice: ciphertext
 
     Note over Alice: decapsulate(ct, sk)
     Alice->>Alice: ss (32 B)
-
     Note over Alice,Bob: shared secrets match
 ```
 
-<br/>
-
-## ✦ PEM keys
-
-Standard Base64 PEM — compatible with everyday tooling.
+## PEM keys
 
 ```python
 from vortex_pqc import PEMKind, write_pem_file, read_pem_file
@@ -166,9 +115,7 @@ AQDQABAAABAAAA0AAAAAAPDP/gzQAhAAAAAAAA3QAA0AAPDPAQAAASAAAADQ/wwA
 
 Private key files are written with mode `0600`.
 
-<br/>
-
-## ✦ C library
+## C library
 
 ```bash
 cd c && make lib && make test && make demo
@@ -187,35 +134,26 @@ vortex_enc(pk, ct, ss);
 vortex_dec(ct, sk, ss);
 ```
 
-<br/>
+## Documentation
 
-## ✦ Documentation
+| Guide | For | You'll learn |
+|:------|:----|:-------------|
+| [Overview](docs/overview.md) | Everyone | What VORTEX is, design goals, positioning |
+| [Quickstart](docs/getting-started.md) | Users | Install, first exchange, PEM files |
+| [Integration guide](docs/guides-key-exchange.md) | Developers | Client–server protocol, session keys |
+| [Core concepts](docs/concepts.md) | Learners | KEM, RotMLWE, Frobenius, FO transform |
+| [Security model](docs/security.md) | Security engineers | Threat model, guarantees, limitations |
+| [API reference](docs/api-reference.md) | Integrators | Python and C API, byte layouts |
+| [Comparison](docs/comparison.md) | Evaluators | vs ML-KEM, NTRU, other PQC |
+| [FAQ](docs/faq.md) | Everyone | Common questions answered |
 
-**[Library home →](https://postquantumlabs.in/library/vortex-pqc)** ·
-**[Full documentation →](docs/README.md)** ·
-**[Published docs →](https://postquantumlabs.in/docs/vortex-pqc)**
+Also available on the web:
 
-Enterprise: **[Bajpai Labs](https://bajpailabs.com)**
+- [Library home](https://postquantumlabs.in/library/vortex-pqc)
+- [Published docs](https://postquantumlabs.in/docs/vortex-pqc)
+- [In-repo docs](docs/README.md)
 
-<table>
-<thead>
-<tr><th align="left">Guide</th><th align="left">For</th><th align="left">You'll learn</th></tr>
-</thead>
-<tbody>
-<tr><td><a href="docs/overview.md">Overview</a></td><td>Everyone</td><td>What VORTEX is, design goals, positioning</td></tr>
-<tr><td><a href="docs/getting-started.md">Quickstart</a></td><td>Users</td><td>Install, first exchange, PEM files</td></tr>
-<tr><td><a href="docs/guides-key-exchange.md">Integration guide</a></td><td>Developers</td><td>Client–server protocol, session keys</td></tr>
-<tr><td><a href="docs/concepts.md">Core concepts</a></td><td>Learners</td><td>KEM, RotMLWE, Frobenius, FO transform</td></tr>
-<tr><td><a href="docs/security.md">Security model</a></td><td>Security engineers</td><td>Threat model, guarantees, limitations</td></tr>
-<tr><td><a href="docs/api-reference.md">API reference</a></td><td>Integrators</td><td>Python and C API, byte layouts</td></tr>
-<tr><td><a href="docs/comparison.md">Comparison</a></td><td>Evaluators</td><td>vs ML-KEM, NTRU, other PQC</td></tr>
-<tr><td><a href="docs/faq.md">FAQ</a></td><td>Everyone</td><td>Common questions answered</td></tr>
-</tbody>
-</table>
-
-<br/>
-
-## ✦ For developers
+## Development
 
 ```bash
 git clone https://github.com/bajpai-labs/vortex-pqc.git
@@ -225,52 +163,47 @@ pip install -e ".[dev]"
 make test
 ```
 
-→ Full workflow in the [Development Guide](docs/development.md)
+See the [Development Guide](docs/development.md) for the full workflow.
 
-<br/>
+## Security
 
-## ✦ Security
+> **Research prototype.** VORTEX-256 introduces a novel hardness assumption that
+> has not received the years of independent cryptanalysis behind NIST-standardised
+> ML-KEM. Suitable for research, education, and prototyping. **Not recommended
+> for production** without a formal security review.
 
-> **Research prototype.** VORTEX-256 introduces a novel hardness assumption
-> that has not received the years of independent cryptanalysis behind
-> NIST-standardised ML-KEM. Suitable for research, education, and prototyping.
-> **Not recommended for production** without a formal security review.
-
-<br/>
-
-## ✦ Related
+## Related
 
 This project is **fully independent** from
 [Kyber-PQC](https://github.com/krish567366/Kyber-PQC) (ML-KEM-512).
 
 ---
 
-## Institutional Backing & Maintenance
+## Institutional backing
 
-**Post-Quantum Labs** is an open-source research and development initiative of **Bajpai Labs**. All frameworks, kernel-level optimizations, and cryptographic implementations hosted here are engineered and maintained by our core systems architecture team.
+**Post-Quantum Labs** is an open-source R&D initiative of **Bajpai Labs**.
+Frameworks, kernel-level optimizations, and cryptographic implementations here
+are engineered and maintained by the core systems architecture team.
 
-| Operational Hub | Technical Documentation |
-| :--- | :--- |
-| [![Bajpai Labs](https://img.shields.io/badge/Enterprise-Bajpai_Labs-181717?style=flat-square)](https://bajpailabs.com) | [![Post-Quantum Labs](https://img.shields.io/badge/Docs-Post--Quantum_Labs-2563eb?style=flat-square)](https://postquantumlabs.com) |
+| Hub | Link |
+|:----|:-----|
+| Enterprise | [bajpailabs.com](https://bajpailabs.com) |
+| Documentation | [postquantumlabs.com](https://postquantumlabs.com) |
+| Library | [postquantumlabs.in/library/vortex-pqc](https://postquantumlabs.in/library/vortex-pqc) |
 
-> **Enterprise Support & Custom Integrations:** Need deterministic sub-microsecond performance, hardware-software co-design, or custom PQC migration frameworks? Contact our corporate consulting arm at [Bajpai Labs](https://bajpailabs.com).
+> **Enterprise support:** Need deterministic sub-microsecond performance,
+> hardware–software co-design, or custom PQC migration frameworks?
+> Contact [Bajpai Labs](https://bajpailabs.com) at partner@bajpailabs.com.
 
----
+### Maintenance & ownership
 
-### Maintenance & Ownership
+This library is part of the open-source ecosystem developed by Post-Quantum Labs,
+a division of Bajpai Labs.
 
-This library is part of the open-source ecosystem developed by Post-Quantum Labs, a wholly-owned division of Bajpai Labs.
-
-- Primary Corporate Hub: https://bajpailabs.com
-- Documentation & Benchmarks: https://postquantumlabs.com
-- Inquiries: research@postquantumlabs.com / hello@bajpailabs.com
+- **Corporate hub:** https://bajpailabs.com
+- **Documentation & benchmarks:** https://postquantumlabs.com
+- **Inquiries:** research@postquantumlabs.com · partner@bajpailabs.com
 
 ## License
 
 MIT License. See [LICENSE](LICENSE) for details.
-
-<p align="center">
-  <a href="https://github.com/bajpai-labs/vortex-pqc"><img src="https://img.shields.io/badge/GitHub-bajpai--labs%2Fvortex--pqc-181717?logo=github" alt="GitHub" /></a>
-  <a href="https://pypi.org/project/vortex-pqc/"><img src="https://img.shields.io/badge/PyPI-vortex--pqc-7c3aed?logo=pypi&logoColor=white" alt="PyPI" /></a>
-  <a href="https://postquantumlabs.in/library/vortex-pqc"><img src="https://img.shields.io/badge/Library-VORTEX--256-7c3aed?logo=python&logoColor=white" alt="Library" /></a>
-</p>
