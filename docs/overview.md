@@ -17,7 +17,7 @@
 ## What is VORTEX-256?
 
 **VORTEX-256** is a lattice-based **Key Encapsulation Mechanism (KEM)** invented
-at Bajpai Labs. It lets two parties establish a shared 32-byte secret over an
+at [Bajpai Labs](https://bajpailabs.com). It lets two parties establish a shared 32-byte secret over an
 insecure channel — the foundational operation behind post-quantum TLS, VPNs,
 and encrypted messaging.
 
@@ -194,7 +194,9 @@ organisations ship experimental APIs before general availability:
 |:------|:-------|
 | Reference implementation | ✅ Python + C |
 | Test suite | ✅ 26 Python + 3 C tests |
-| Documentation | ✅ You are here |
+| Library home | ✅ [postquantumlabs.in/library/vortex-pqc](https://postquantumlabs.in/library/vortex-pqc) |
+| Documentation | ✅ [postquantumlabs.in/docs/vortex-pqc](https://postquantumlabs.in/docs/vortex-pqc) |
+| Enterprise | ✅ [Bajpai Labs](https://bajpailabs.com) |
 | PyPI distribution | ✅ `vortex-pqc` |
 | NIST standardisation | ❌ Not applicable |
 | Independent cryptanalysis | ⏳ Ongoing community review welcome |

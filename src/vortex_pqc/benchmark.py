@@ -1,8 +1,49 @@
 """Throughput benchmarking for VORTEX-256 KEM operations."""
 
-import time
 import statistics
-import vortex_pqc
+import time
+
+from .core import decapsulate, encapsulate, generate_keypair
+
+
+def benchmark_throughput(operations: int = 50) -> dict:
+    """
+    Measure keygen, encapsulation, and decapsulation throughput.
+
+    Returns mean ops/s and a 95% confidence interval for each operation.
+    """
+    if operations < 1:
+        raise ValueError("operations must be >= 1")
+
+    def _measure(op_callable, n: int) -> dict:
+        for _ in range(min(100, n)):
+            op_callable()
+
+        ops_per_sec = []
+        for _ in range(n):
+            start = time.perf_counter_ns()
+            op_callable()
+            elapsed_ns = time.perf_counter_ns() - start
+            if elapsed_ns > 0:
+                ops_per_sec.append(1_000_000_000 / elapsed_ns)
+
+        mean = statistics.mean(ops_per_sec)
+        if len(ops_per_sec) > 1:
+            ci = 1.96 * statistics.stdev(ops_per_sec) / (len(ops_per_sec) ** 0.5)
+        else:
+            ci = 0.0
+        return {"mean_ops": mean, "confidence_interval": ci}
+
+    kp = generate_keypair()
+    ct = encapsulate(kp.public_key)
+    pk, sk, ct_data = kp.public_key, kp.private_key, ct.data
+
+    return {
+        "keygen": _measure(generate_keypair, operations),
+        "encaps": _measure(lambda: encapsulate(pk), operations),
+        "decaps": _measure(lambda: decapsulate(ct_data, sk), operations),
+    }
+
 
 def run_profile(op_callable, iterations=10000):
     """
@@ -40,6 +81,8 @@ def main():
     """
     Main function to run the benchmarks.
     """
+    import vortex_pqc
+
     print("--- VORTEX-PQC Python Benchmark ---")
 
     # --- Pure Python Implementation ---

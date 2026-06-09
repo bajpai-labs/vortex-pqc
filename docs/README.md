@@ -15,8 +15,11 @@
   <a href="getting-started.md"><img src="https://img.shields.io/badge/Start-Quickstart-2563eb?style=flat-square" alt="Quickstart" /></a>
   <a href="overview.md"><img src="https://img.shields.io/badge/Learn-Overview-7c3aed?style=flat-square" alt="Overview" /></a>
   <a href="api-reference.md"><img src="https://img.shields.io/badge/Reference-API-181717?style=flat-square" alt="API" /></a>
+  <a href="https://postquantumlabs.in/library/vortex-pqc"><img src="https://img.shields.io/badge/Library-vortex--pqc-7c3aed?style=flat-square" alt="Library home" /></a>
+  <a href="https://postquantumlabs.in/docs/vortex-pqc"><img src="https://img.shields.io/badge/Docs-postquantumlabs.in-2563eb?style=flat-square" alt="Documentation portal" /></a>
   <a href="https://github.com/bajpai-labs/vortex-pqc"><img src="https://img.shields.io/badge/Source-GitHub-181717?style=flat-square&logo=github" alt="GitHub" /></a>
   <a href="https://pypi.org/project/vortex-pqc/"><img src="https://img.shields.io/badge/Install-PyPI-7c3aed?style=flat-square&logo=pypi&logoColor=white" alt="PyPI" /></a>
+  <a href="https://bajpailabs.com"><img src="https://img.shields.io/badge/Enterprise-Bajpai_Labs-181717?style=flat-square" alt="Bajpai Labs" /></a>
 </p>
 
 <br/>
@@ -200,8 +203,9 @@ assert decapsulate(bob.data, alice.private_key) == bob.shared_secret
 
 <p align="center">
   <sub>
-    Published from <a href="https://github.com/bajpai-labs/vortex-pqc">bajpai-labs/vortex-pqc</a>
-    · Synced to <a href="https://github.com/bajpai-labs/documentation/tree/main/docs/vortex-pqc">bajpai-labs/documentation</a>
-    · MIT © <a href="https://github.com/bajpai-labs">Bajpai Labs</a>
+    Library <a href="https://postquantumlabs.in/library/vortex-pqc">postquantumlabs.in/library/vortex-pqc</a>
+    · Docs <a href="https://postquantumlabs.in/docs/vortex-pqc">postquantumlabs.in/docs/vortex-pqc</a>
+    · Enterprise <a href="https://bajpailabs.com">Bajpai Labs</a>
+    · Source <a href="https://github.com/bajpai-labs/vortex-pqc">bajpai-labs/vortex-pqc</a>
   </sub>
 </p>

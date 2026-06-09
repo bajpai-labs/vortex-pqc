@@ -4,12 +4,17 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "vortex-pqc"
-version = "0.1.0"
+version = "1.0.1"
 description = "VORTEX-256: Novel post-quantum KEM based on Rotational Module LWE (RotMLWE)"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
-authors = [{name = "Bajpai Labs", email = "hello@bajpailabs.com"}]
+authors = [
+    {name = "Post-Quantum Labs (Bajpai Labs)", email = "research@postquantumlabs.com"},
+]
+maintainers = [
+    {name = "Bajpai Labs", email = "hello@bajpailabs.com"},
+]
 keywords = [
     "post-quantum", "cryptography", "kem", "lattice",
     "rotational-lwe", "rotmlwe", "vortex", "security"
@@ -41,10 +46,12 @@ benchmark = [
 ]
 
 [project.urls]
-Homepage      = "https://github.com/bajpai-labs/vortex-pqc"
-Documentation = "https://github.com/bajpai-labs/documentation/tree/main/docs/vortex-pqc"
+Homepage      = "https://postquantumlabs.in/library/vortex-pqc"
+Documentation = "https://postquantumlabs.com"
 Repository    = "https://github.com/bajpai-labs/vortex-pqc"
 "Bug Tracker" = "https://github.com/bajpai-labs/vortex-pqc/issues"
+Enterprise    = "https://bajpailabs.com"
+"Post-Quantum Labs" = "https://postquantumlabs.com"
 
 [tool.setuptools.packages.find]
 where = ["src"]

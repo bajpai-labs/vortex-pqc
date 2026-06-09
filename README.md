@@ -1,4 +1,8 @@
 <p align="center">
+  <a href="https://bajpailabs.com"><img src="https://img.shields.io/badge/Enterprise-Bajpai_Labs-181717?style=for-the-badge" alt="Bajpai Labs" /></a>
+</p>
+
+<p align="center">
   <img src="https://img.shields.io/badge/post--quantum-KEM-7c3aed?style=for-the-badge" alt="Post-Quantum KEM" />
   <img src="https://img.shields.io/badge/primitive-RotMLWE-2563eb?style=for-the-badge" alt="RotMLWE" />
   <img src="https://img.shields.io/badge/python-3.10+-3776ab?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.10+" />
@@ -9,13 +13,15 @@
 
 <p align="center">
   <strong>A new lattice KEM built on Rotational Module Learning With Errors</strong><br/>
-  <sub>Same footprint as Kyber-512 · Entirely different mathematics · Standalone library</sub>
+  <sub>Same footprint as Kyber-512 · Entirely different mathematics · Standalone library</sub><br/>
+  <sub>A <a href="https://bajpailabs.com">Bajpai Labs</a> project · <a href="https://postquantumlabs.in/library/vortex-pqc">postquantumlabs.in/library/vortex-pqc</a></sub>
 </p>
 
 <p align="center">
   <a href="https://github.com/bajpai-labs/vortex-pqc/actions/workflows/ci.yml"><img src="https://github.com/bajpai-labs/vortex-pqc/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
   <a href="https://pypi.org/project/vortex-pqc/"><img src="https://img.shields.io/pypi/v/vortex-pqc?color=7c3aed" alt="PyPI" /></a>
-  <a href="https://github.com/bajpai-labs/documentation/tree/main/docs/vortex-pqc"><img src="https://img.shields.io/badge/docs-read-2563eb" alt="Documentation" /></a>
+  <a href="https://postquantumlabs.in/library/vortex-pqc"><img src="https://img.shields.io/badge/home-library-7c3aed" alt="Library" /></a>
+  <a href="https://postquantumlabs.in/docs/vortex-pqc"><img src="https://img.shields.io/badge/docs-read-2563eb" alt="Documentation" /></a>
 </p>
 
 <br/>
@@ -185,8 +191,11 @@ vortex_dec(ct, sk, ss);
 
 ## ✦ Documentation
 
+**[Library home →](https://postquantumlabs.in/library/vortex-pqc)** ·
 **[Full documentation →](docs/README.md)** ·
-**[Published portal →](https://github.com/bajpai-labs/documentation/tree/main/docs/vortex-pqc)**
+**[Published docs →](https://postquantumlabs.in/docs/vortex-pqc)**
+
+Enterprise: **[Bajpai Labs](https://bajpailabs.com)**
 
 <table>
 <thead>
@@ -234,11 +243,34 @@ make test
 This project is **fully independent** from
 [Kyber-PQC](https://github.com/krish567366/Kyber-PQC) (ML-KEM-512).
 
+---
+
+## Institutional Backing & Maintenance
+
+**Post-Quantum Labs** is an open-source research and development initiative of **Bajpai Labs**. All frameworks, kernel-level optimizations, and cryptographic implementations hosted here are engineered and maintained by our core systems architecture team.
+
+| Operational Hub | Technical Documentation |
+| :--- | :--- |
+| [![Bajpai Labs](https://img.shields.io/badge/Enterprise-Bajpai_Labs-181717?style=flat-square)](https://bajpailabs.com) | [![Post-Quantum Labs](https://img.shields.io/badge/Docs-Post--Quantum_Labs-2563eb?style=flat-square)](https://postquantumlabs.com) |
+
+> **Enterprise Support & Custom Integrations:** Need deterministic sub-microsecond performance, hardware-software co-design, or custom PQC migration frameworks? Contact our corporate consulting arm at [Bajpai Labs](https://bajpailabs.com).
+
+---
+
+### Maintenance & Ownership
+
+This library is part of the open-source ecosystem developed by Post-Quantum Labs, a wholly-owned division of Bajpai Labs.
+
+- Primary Corporate Hub: https://bajpailabs.com
+- Documentation & Benchmarks: https://postquantumlabs.com
+- Inquiries: research@postquantumlabs.com / hello@bajpailabs.com
+
+## License
+
+MIT License. See [LICENSE](LICENSE) for details.
+
 <p align="center">
   <a href="https://github.com/bajpai-labs/vortex-pqc"><img src="https://img.shields.io/badge/GitHub-bajpai--labs%2Fvortex--pqc-181717?logo=github" alt="GitHub" /></a>
   <a href="https://pypi.org/project/vortex-pqc/"><img src="https://img.shields.io/badge/PyPI-vortex--pqc-7c3aed?logo=pypi&logoColor=white" alt="PyPI" /></a>
-</p>
-
-<p align="center">
-  <sub>MIT © <a href="https://github.com/bajpai-labs">Bajpai Labs</a> · Invented for the post-quantum era</sub>
+  <a href="https://postquantumlabs.in/library/vortex-pqc"><img src="https://img.shields.io/badge/Library-VORTEX--256-7c3aed?logo=python&logoColor=white" alt="Library" /></a>
 </p>

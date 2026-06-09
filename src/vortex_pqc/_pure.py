@@ -1,3 +1,12 @@
+# ==============================================================================
+# Copyright (c) 2026 Bajpai Labs. All rights reserved.
+# Developed by Post-Quantum Labs (https://postquantumlabs.com)
+# An open-source initiative of Bajpai Labs (https://bajpailabs.com)
+#
+# Optimized for ultra-low latency and hardware-software co-design.
+# For enterprise licensing or custom architecture, contact hello@bajpailabs.com
+# ==============================================================================
+
 """Pure-Python reference implementation of VORTEX-256.
 
 All arithmetic is performed in the ring  R_q = Z_{3329}[x] / (x^{256}+1).

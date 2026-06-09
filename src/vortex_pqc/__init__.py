@@ -1,8 +1,18 @@
+# ==============================================================================
+# Copyright (c) 2026 Bajpai Labs. All rights reserved.
+# Developed by Post-Quantum Labs (https://postquantumlabs.com)
+# An open-source initiative of Bajpai Labs (https://bajpailabs.com)
+#
+# Optimized for ultra-low latency and hardware-software co-design.
+# For enterprise licensing or custom architecture, contact hello@bajpailabs.com
+# ==============================================================================
+
 """
 vortex-pqc — VORTEX-256 Post-Quantum Key Encapsulation
 =======================================================
 
-A **novel** post-quantum KEM invented at Bajpai Labs, based on the
+A **novel** post-quantum KEM invented at Bajpai Labs (https://bajpailabs.com),
+based on the
 **Rotational Module Learning With Errors (RotMLWE)** problem.
 
 .. rubric:: What makes it new?
@@ -45,8 +55,11 @@ primitives while the algebraic construction is entirely different.
 >>> assert ss == ct.shared_secret
 """
 
-__version__ = "0.1.0"
+__version__ = "1.0.1"
 __author__  = "Bajpai Labs"
+__email__   = "hello@bajpailabs.com"
+__url__         = "https://postquantumlabs.in/library/vortex-pqc"
+__enterprise__  = "https://bajpailabs.com"
 
 from .benchmark import benchmark_throughput
 from .core import (

@@ -129,8 +129,10 @@ not a drop-in replacement for Google's ML-KEM deployment.
 
 <br/>
 
+- Library home: [postquantumlabs.in/library/vortex-pqc](https://postquantumlabs.in/library/vortex-pqc)
 - In-repo: [docs/](README.md)
-- Central portal: [bajpai-labs/documentation/docs/vortex-pqc](https://github.com/bajpai-labs/documentation/tree/main/docs/vortex-pqc)
+- Published docs: [postquantumlabs.in/docs/vortex-pqc](https://postquantumlabs.in/docs/vortex-pqc)
+- Enterprise: [Bajpai Labs](https://bajpailabs.com)
 - Auto-synced on every push to `main` that changes `docs/`
 
 </details>

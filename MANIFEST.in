@@ -1,0 +1,5 @@
+include LICENSE
+include README.md
+recursive-include c/include *.h
+recursive-include c/src *.h
+recursive-include c/vendor/sha3 *.h

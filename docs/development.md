@@ -288,9 +288,14 @@ Every push and PR to `main` runs:
 
 ## Documentation sync
 
-Published docs live in the central Bajpai Labs documentation repo:
+Library home: **[postquantumlabs.in/library/vortex-pqc](https://postquantumlabs.in/library/vortex-pqc)**
 
-**[bajpai-labs/documentation → docs/vortex-pqc](https://github.com/bajpai-labs/documentation/tree/main/docs/vortex-pqc)**
+Published docs: **[postquantumlabs.in/docs/vortex-pqc](https://postquantumlabs.in/docs/vortex-pqc)**
+
+Enterprise: **[Bajpai Labs](https://bajpailabs.com)**
+
+Source is synced to the Bajpai Labs documentation repo (`bajpai-labs/documentation`)
+before deployment.
 
 ### Automatic (CI)
 
