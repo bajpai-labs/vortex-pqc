@@ -41,9 +41,10 @@ benchmark = [
 ]
 
 [project.urls]
-Homepage      = "https://quantum.postquantumlabs.in/vortex-pqc"
-Documentation = "https://quantum.postquantumlabs.in/docs/vortex-pqc"
+Homepage      = "https://github.com/bajpai-labs/vortex-pqc"
+Documentation = "https://github.com/bajpai-labs/documentation/tree/main/docs/vortex-pqc"
 Repository    = "https://github.com/bajpai-labs/vortex-pqc"
+"Bug Tracker" = "https://github.com/bajpai-labs/vortex-pqc/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]

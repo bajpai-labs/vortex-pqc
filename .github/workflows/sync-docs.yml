@@ -1,0 +1,63 @@
+name: Sync Documentation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "docs/**"
+      - ".github/workflows/sync-docs.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: sync-docs
+  cancel-in-progress: true
+
+jobs:
+  sync-to-documentation:
+    name: Sync docs → bajpai-labs/documentation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout vortex-pqc
+        uses: actions/checkout@v4
+
+      - name: Checkout documentation repo
+        uses: actions/checkout@v4
+        with:
+          repository: bajpai-labs/documentation
+          token: ${{ secrets.DOCS_SYNC_TOKEN }}
+          path: documentation
+
+      - name: Sync docs/vortex-pqc
+        run: |
+          mkdir -p documentation/docs/vortex-pqc
+          rsync -av --delete \
+            --exclude '.DS_Store' \
+            docs/ documentation/docs/vortex-pqc/
+
+      - name: Commit and push
+        working-directory: documentation
+        env:
+          SOURCE_REPO: ${{ github.repository }}
+          SOURCE_SHA: ${{ github.sha }}
+          SOURCE_REF: ${{ github.ref_name }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add docs/vortex-pqc/
+
+          if git diff --staged --quiet; then
+            echo "No documentation changes to publish."
+            exit 0
+          fi
+
+          git commit -m "$(cat <<EOF
+docs(vortex-pqc): sync from ${SOURCE_REPO}@${SOURCE_SHA:0:7}
+
+Source branch: ${SOURCE_REF}
+Triggered by: ${{ github.event_name }}
+Workflow run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+EOF
+)"
+          git push origin HEAD

@@ -48,6 +48,13 @@ examples/demo: examples/demo.c build/libvortex_pqc.a
 demo: examples/demo
 	./examples/demo
 
+# ── Benchmark ─────────────────────────────────────────────────────────────
+tests/test_bench: tests/test_bench.c build/libvortex_pqc.a
+	$(CC) $(CFLAGS) -g $< build/libvortex_pqc.a -o $@
+
+bench: lib tests/test_bench
+	./tests/test_bench
+
 clean:
 	rm -rf build src/*.o $(VENDOR)/*.o \
-	       tests/test_vortex examples/demo
+	       tests/test_vortex examples/demo tests/test_bench

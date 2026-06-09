@@ -1,76 +1,87 @@
 """Throughput benchmarking for VORTEX-256 KEM operations."""
 
-from __future__ import annotations
-
-import statistics
 import time
-from typing import Callable, Dict, List, Sequence, TypeVar
+import statistics
+import vortex_pqc
 
-from .core import decapsulate, encapsulate, generate_keypair
-
-WARMUP_ITERATIONS = 5
-CONFIDENCE_LEVEL  = 0.99
-
-T = TypeVar("T")
-
-
-def benchmark_throughput(operations: int) -> Dict[str, Dict[str, float]]:
-    """Measure keygen / encaps / decaps throughput over *operations* iterations.
-
-    Returns a dict mapping operation name → {"mean_ops": float, "confidence_interval": float}.
+def run_profile(op_callable, iterations=10000):
     """
-    if operations < 1:
-        raise ValueError("operations must be at least 1")
+    Runs a profiling test for a given operation.
 
-    keypairs   = [generate_keypair() for _ in range(operations)]
-    pub_keys   = [kp.public_key for kp in keypairs]
-    encapsulated = [encapsulate(pk) for pk in pub_keys]
+    Args:
+        op_callable (function): The operation to be benchmarked.
+        iterations (int): The number of iterations to run.
 
-    return {
-        "keygen": _analyze(_time_op(generate_keypair, operations)),
-        "encaps": _analyze(_time_op(lambda pk: encapsulate(pk), operations, pub_keys)),
-        "decaps": _analyze(
-            _time_op(
-                lambda ct, sk: decapsulate(ct.data, sk),
-                operations,
-                list(zip(encapsulated, [kp.private_key for kp in keypairs])),
-            )
-        ),
-    }
+    Returns:
+        A tuple containing the average latency in microseconds and operations per second.
+    """
+    # Warm-up phase
+    for _ in range(1000):
+        op_callable()
+    
+    timings = []
+    for _ in range(iterations):
+        start = time.perf_counter_ns()
+        op_callable()
+        end = time.perf_counter_ns()
+        timings.append(end - start)
+    
+    median_latency_ns = statistics.median(timings)
+    
+    # Convert nanoseconds to microseconds for average latency
+    avg_latency_us = median_latency_ns / 1000
+    
+    # Calculate operations per second
+    ops_per_sec = 1_000_000_000 / median_latency_ns if median_latency_ns > 0 else 0
+    
+    return avg_latency_us, ops_per_sec
 
+def main():
+    """
+    Main function to run the benchmarks.
+    """
+    print("--- VORTEX-PQC Python Benchmark ---")
 
-def _time_op(
-    func: Callable[..., T],
-    operations: int,
-    inputs: Sequence = (),
-) -> List[float]:
-    def _call(item: object) -> None:
-        if isinstance(item, tuple):
-            func(*item)
-        elif item is not None:
-            func(item)
-        else:
-            func()
+    # --- Pure Python Implementation ---
+    print("\n[+] Benchmarking pure-Python backend...")
+    vortex_pqc.core._be = vortex_pqc._pure
+    
+    # Keygen
+    avg_latency_us, ops_per_sec = run_profile(vortex_pqc.generate_keypair)
+    print(f"  keygen: {avg_latency_us:.2f} µs/op  ({ops_per_sec:.2f} ops/sec)")
 
-    first = inputs[0] if inputs else None
-    for _ in range(WARMUP_ITERATIONS):
-        _call(first)
+    # Encap
+    kp = vortex_pqc.generate_keypair()
+    avg_latency_us, ops_per_sec = run_profile(lambda: vortex_pqc.encapsulate(kp.public_key))
+    print(f"  encap:  {avg_latency_us:.2f} µs/op  ({ops_per_sec:.2f} ops/sec)")
 
-    durations: List[float] = []
-    for item in (inputs or ([None] * operations)):
-        t0 = time.perf_counter()
-        _call(item)
-        durations.append(time.perf_counter() - t0)
-    return durations
+    # Decap
+    ct = vortex_pqc.encapsulate(kp.public_key)
+    avg_latency_us, ops_per_sec = run_profile(lambda: vortex_pqc.decapsulate(ct.data, kp.private_key))
+    print(f"  decap:  {avg_latency_us:.2f} µs/op  ({ops_per_sec:.2f} ops/sec)")
 
+    # --- Native C Implementation ---
+    try:
+        vortex_pqc.core._be = vortex_pqc._native
+        print("\n[+] Benchmarking native C backend...")
+        
+        # Keygen
+        avg_latency_us, ops_per_sec = run_profile(vortex_pqc.generate_keypair)
+        print(f"  keygen: {avg_latency_us:.2f} µs/op  ({ops_per_sec:.2f} ops/sec)")
 
-def _analyze(durations: Sequence[float]) -> Dict[str, float]:
-    if not durations:
-        return {"mean_ops": 0.0, "confidence_interval": 0.0}
-    mean = statistics.mean(durations)
-    if len(durations) < 2:
-        return {"mean_ops": 1 / mean, "confidence_interval": 0.0}
-    stdev  = statistics.stdev(durations)
-    z_val  = statistics.NormalDist().inv_cdf((1 + CONFIDENCE_LEVEL) / 2)
-    margin = (z_val * stdev) / (len(durations) ** 0.5)
-    return {"mean_ops": 1 / mean, "confidence_interval": margin / mean}
+        # Encap
+        kp = vortex_pqc.generate_keypair()
+        avg_latency_us, ops_per_sec = run_profile(lambda: vortex_pqc.encapsulate(kp.public_key))
+        print(f"  encap:  {avg_latency_us:.2f} µs/op  ({ops_per_sec:.2f} ops/sec)")
+
+        # Decap
+        ct = vortex_pqc.encapsulate(kp.public_key)
+        avg_latency_us, ops_per_sec = run_profile(lambda: vortex_pqc.decapsulate(ct.data, kp.private_key))
+        print(f"  decap:  {avg_latency_us:.2f} µs/op  ({ops_per_sec:.2f} ops/sec)")
+
+    except ImportError:
+        print("\n[-] Native C backend not available. Skipping.")
+
+if __name__ == "__main__":
+    main()
+
