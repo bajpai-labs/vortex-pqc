@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vortex-pqc"
+version = "0.1.0"
+description = "VORTEX-256: Novel post-quantum KEM based on Rotational Module LWE (RotMLWE)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Bajpai Labs", email = "hello@bajpailabs.com"}]
+keywords = [
+    "post-quantum", "cryptography", "kem", "lattice",
+    "rotational-lwe", "rotmlwe", "vortex", "security"
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Security :: Cryptography",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+]
+# Pure-Python: no runtime dependencies
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "mypy>=1.0.0",
+    "flake8>=5.0.0",
+]
+benchmark = [
+    "pytest-benchmark>=4.0.0",
+]
+
+[project.urls]
+Homepage      = "https://quantum.postquantumlabs.in/vortex-pqc"
+Documentation = "https://quantum.postquantumlabs.in/docs/vortex-pqc"
+Repository    = "https://github.com/bajpai-labs/vortex-pqc"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["src/tests"]
+addopts   = "-v"
+
+[tool.mypy]
+python_version        = "3.10"
+warn_return_any       = true
+warn_unused_configs   = true
+disallow_untyped_defs = false
+
+[tool.coverage.run]
+source = ["vortex_pqc"]

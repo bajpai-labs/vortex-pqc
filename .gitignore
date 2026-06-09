@@ -1,0 +1,30 @@
+# Security
+*.key
+*.pem
+*.cert
+
+# Build artifacts
+__pycache__/
+*.so
+*.pyd
+c/build/
+c/src/*.o
+c/vendor/sha3/*.o
+c/tests/test_vortex
+c/examples/demo
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Development
+.venv/
+.env
+.vscode/
+.mypy_cache/
+.pytest_cache/
+
+# Testing
+.coverage
+htmlcov/
